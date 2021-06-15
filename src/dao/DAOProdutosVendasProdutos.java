@@ -83,7 +83,7 @@ public class DAOProdutosVendasProdutos extends ConexaoMySql {
         try {
             this.conectar();
             this.executarSQL("SELECT "
-                    + "                    tblproduto.pro_cod, \n"
+                    + "          tblproduto.pro_cod, \n"
                     + "		 tblproduto.pro_estoque, \n"
                     + "		 tblproduto.pro_nome, \n"
                     + "		 tblproduto.pro_valor,\n"

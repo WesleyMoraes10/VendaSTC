@@ -11,12 +11,25 @@ import controller.ControllerProdutosVendasProdutos;
 import controller.ControllerVenda;
 import controller.ControllerVendaProduto;
 import controller.ControllerVendasCliente;
+import java.io.ByteArrayInputStream;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.sql.Date;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.print.DocFlavor;
+import javax.print.DocPrintJob;
+import javax.print.PrintService;
+import javax.print.PrintServiceLookup;
+import javax.print.SimpleDoc;
+import javax.print.attribute.HashPrintRequestAttributeSet;
+import javax.print.attribute.PrintRequestAttributeSet;
+import javax.print.attribute.standard.JobName;
+import javax.print.attribute.standard.MediaSizeName;
+import javax.print.attribute.standard.OrientationRequested;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -24,6 +37,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import jdk.jfr.events.FileWriteEvent;
 import model.ModelCliente;
 import model.ModelProduto;
 import model.ModelProdutosVendasProdutos;
@@ -108,7 +122,6 @@ public class ViewCadastroPedidoNova extends javax.swing.JFrame {
         jtfDesconto.setText(String.valueOf(0));
         preencherCodClientPeloComBox();
         preencherCodigoProdutoComboBox();
-        btSalvar1.setEnabled(false);
         inicializaBotao();
         habilitarDesabilitarCampo(false);
         jtfComanda.setText("0");
@@ -152,7 +165,6 @@ public class ViewCadastroPedidoNova extends javax.swing.JFrame {
         jPanel8 = new javax.swing.JPanel();
         btNovo1 = new javax.swing.JButton();
         btCancelar1 = new javax.swing.JButton();
-        btSalvar1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         btFinalizadaPedido1 = new javax.swing.JButton();
@@ -163,6 +175,7 @@ public class ViewCadastroPedidoNova extends javax.swing.JFrame {
         btExcluir1 = new javax.swing.JButton();
         btSalvaAlteracao = new javax.swing.JButton();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
@@ -466,14 +479,6 @@ public class ViewCadastroPedidoNova extends javax.swing.JFrame {
             }
         });
 
-        btSalvar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon32px/salvar.png"))); // NOI18N
-        btSalvar1.setText("Salvar");
-        btSalvar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btSalvar1ActionPerformed(evt);
-            }
-        });
-
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -504,10 +509,8 @@ public class ViewCadastroPedidoNova extends javax.swing.JFrame {
                 .addComponent(btNovo1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btCancelar1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btSalvar1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(129, 129, 129)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btFinalizadaPedido1)
                 .addGap(18, 18, 18)
@@ -515,7 +518,7 @@ public class ViewCadastroPedidoNova extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel8Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btCancelar1, btNovo1, btSalvar1});
+        jPanel8Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btCancelar1, btNovo1});
 
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -526,14 +529,13 @@ public class ViewCadastroPedidoNova extends javax.swing.JFrame {
                         .addComponent(btFinalizadaPedido1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btNovo1)
-                            .addComponent(btCancelar1)
-                            .addComponent(btSalvar1)))
+                            .addComponent(btCancelar1)))
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel8Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btCancelar1, btFinalizadaPedido1, btNovo1, btSalvar1});
+        jPanel8Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btCancelar1, btFinalizadaPedido1, btNovo1});
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pedidos pedentes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), java.awt.SystemColor.textHighlight)); // NOI18N
 
@@ -544,7 +546,7 @@ public class ViewCadastroPedidoNova extends javax.swing.JFrame {
             public void valueChanged(ListSelectionEvent e) {
                 if (! e.getValueIsAdjusting()){
                     tblPedidoLinhaSelecionada(jtablePedidos);
-                    btSalvar1.setEnabled(false);
+
                 }
             }
         });
@@ -594,7 +596,7 @@ public class ViewCadastroPedidoNova extends javax.swing.JFrame {
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btSalvaAlteracao, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btExcluir1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -699,13 +701,11 @@ public class ViewCadastroPedidoNova extends javax.swing.JFrame {
     }
 
     public void acaoBotao() {
-        btSalvar1.setEnabled(false);
         btSalvaAlteracao.setEnabled(true);
         btExcluir1.setEnabled(true);
     }
 
     public void liberaBotaoParaAlteracao() {
-        btSalvar1.setEnabled(true);
         btSalvaAlteracao.setEnabled(false);
     }
 
@@ -793,6 +793,7 @@ public class ViewCadastroPedidoNova extends javax.swing.JFrame {
                 listaModelVenda.get(i).getVen_nome_cliente()
             });
         }
+       
     }
 
     /**
@@ -862,6 +863,78 @@ public class ViewCadastroPedidoNova extends javax.swing.JFrame {
 
     }
 
+    private void imprimirCupom(ArrayList<ModelProdutosVendasProdutos> listaModelProdutosVendasProdutos, ModelVenda modelVenda) {
+
+        String dataF = "dd/MM/yyyy";
+        String horaF = "H:mm -a";
+        String data, hora;
+
+        //pega data
+        java.util.Date dataAtual = new java.util.Date();
+        SimpleDateFormat formata = new SimpleDateFormat(dataF);
+        data = formata.format(dataAtual);
+
+        //pega hora
+        formata = new SimpleDateFormat(horaF);
+        hora = formata.format(dataAtual);
+
+        String conteudoImpressao = "";
+
+        for (int i = 0; i < this.listaModelVendaProdutos.size(); i++) {
+            conteudoImpressao += listaModelVendaProdutos.get(i).getVep_pro_quantidade() + "     "
+                    + listaModelVendaProdutos.get(i).getVep_pro_valor() + "   "
+                    + listaModelVendaProdutos.get(i).getNomeProduto() + "\n\r";
+        }
+
+        this.imprimir("ESPETARIA ADEGA BEER\n\r"
+                + "-------------------------------\n\r"
+                + "Avenida Domingos Carmelindo Caló\n\r"
+                + "N.° 2932\n\r"
+                + "Vila Musa\n\r"
+                + "Celular: (14)99682-3086\n\r"
+                + "-------------------------------\n\r"
+                + "          PEDIDOS      \n\r"
+                + "Mesa: " + modelVenda.getVen_comanda() + "\n\r"
+                + "-------------------------------\n\r"
+                + "Quat Valor  Produto\n\r"
+                + conteudoImpressao + ""
+                + "-------------------------------\n\r"
+                + "           Obrigado             \n\r"
+                + "\n\r \n\r \f"
+        );
+    }
+
+    public void imprimir(String texto) {
+        try {
+            //InputStream prin = new ByteArrayInputStream(texto.getBytes());
+            ByteArrayInputStream prin = new ByteArrayInputStream(texto.getBytes());
+            DocFlavor docFlavor = DocFlavor.INPUT_STREAM.AUTOSENSE;
+            SimpleDoc documentoTexto = new SimpleDoc(prin, docFlavor, null);
+            PrintService impressora = PrintServiceLookup.lookupDefaultPrintService();
+
+            //pega impressora padrão
+            PrintRequestAttributeSet printRequestAttributeSet = new HashPrintRequestAttributeSet();
+            printRequestAttributeSet.add(new JobName("Impressao", null));
+            printRequestAttributeSet.add(OrientationRequested.PORTRAIT);
+            printRequestAttributeSet.add(MediaSizeName.ISO_A4);
+
+            //informa tipo de folha
+            DocPrintJob printJob = impressora.createPrintJob();
+            
+
+            try {
+                printJob.print(documentoTexto, (PrintRequestAttributeSet) printRequestAttributeSet);                
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Não foi possivel realizar impressão!!", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+
+            prin.close();
+
+        } catch (Exception e) {
+        }
+
+    }
+
     private void jtfComandaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfComandaFocusLost
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfComandaFocusLost
@@ -917,20 +990,25 @@ public class ViewCadastroPedidoNova extends javax.swing.JFrame {
     }//GEN-LAST:event_jtfDescontoFocusLost
 
     private void btNovo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNovo1ActionPerformed
-        salvarAlterar = "novo";
+        ViewLancaPedido lancaPedido = new ViewLancaPedido();
+        lancaPedido.setVisible(true);   
+        
+        this.dispose();
+        
+        /*salvarAlterar = "novo";
         btSalvar1.setEnabled(true);
         inicializaBotao();
         limparFormulario();
         habilitarDesabilitarCampo(true);
 
         modelCliente = controllerCliente.retornaClienteNomeConsumidorController();
-        if (modelCliente.getCli_nome()==null){
+        if (modelCliente.getCli_nome() == null) {
             JOptionPane.showMessageDialog(this, "Cliente 'CONSUMIDOR' não cadastrado,\n\n"
-                                                + "Precisa ser cadastrado por padrão do Sistema.", "ATENÇÃO", JOptionPane.WARNING_MESSAGE);
+                    + "Precisa ser cadastrado por padrão do Sistema.", "ATENÇÃO", JOptionPane.WARNING_MESSAGE);
         } else {
             jtfCodCliente.setText(String.valueOf(modelCliente.getCli_cod()));
             jcbCliente.setSelectedItem(modelCliente.getCli_nome());
-        }
+        }*/
 
 
     }//GEN-LAST:event_btNovo1ActionPerformed
@@ -940,75 +1018,7 @@ public class ViewCadastroPedidoNova extends javax.swing.JFrame {
         inicializaBotao();
         limparFormulario();
         habilitarDesabilitarCampo(false);
-        btSalvar1.setEnabled(false);
     }//GEN-LAST:event_btCancelar1ActionPerformed
-
-    private void btSalvar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvar1ActionPerformed
-
-        int codVenda = 0;
-        int codProduto = 0;
-        double desconto = 0;
-        listaModelVendaProdutos = new ArrayList<>();
-
-        if (jtfDesconto.getText().equals("")) {
-            desconto = 0;
-        } else {
-            desconto = Double.parseDouble(jtfDesconto.getText());
-        }
-
-        modelVenda.setVen_cod_cliente(Integer.parseInt(jtfCodCliente.getText()));
-        try {
-            modelVenda.setVen_data(formatarData.converterDataParaDateUS(new java.util.Date(System.currentTimeMillis())));
-
-        } catch (Exception ex) {
-            Logger.getLogger(ViewCadastroVenda.class
-                    .getName()).log(Level.SEVERE, null, ex);
-        }
-
-        modelVenda.setVen_valor_liquido(Double.parseDouble(jtfValorTotal.getText().replace(",", ".")));
-        modelVenda.setVen_valor_bruto(Double.parseDouble(jtfValorTotal.getText().replace(",", ".")) + Double.parseDouble(jtfDesconto.getText().replace(",", ".")));
-        modelVenda.setVen_desconto(desconto);
-        modelVenda.setVen_comanda(Integer.parseInt(jtfComanda.getText()));
-        modelVenda.setVen_status("pedido");
-        modelVenda.setVen_nome_cliente(jcbCliente.getSelectedItem().toString());
-
-        //Salvar venda TBLVENDA
-        codVenda = controllerVenda.salvarVendaController(modelVenda);
-        if (codVenda > 0) {
-        } else {
-            JOptionPane.showMessageDialog(this, "Erro ao cadastrar venda!", "ERRO", JOptionPane.ERROR_MESSAGE);
-        }
-
-        int cont = jtableProdutoVenda.getRowCount();
-        for (int i = 0; i < cont; i++) {
-            codProduto = (int) jtableProdutoVenda.getValueAt(i, 0);
-            modelVendaProduto = new ModelVendaProduto();
-            modelProduto = new ModelProduto();
-            modelVendaProduto.setVep_cod_produto(codProduto);
-            modelVendaProduto.setVep_cod_venda(codVenda);
-            modelVendaProduto.setVep_pro_valor((double) jtableProdutoVenda.getValueAt(i, 3));
-            modelVendaProduto.setVep_pro_quantidade(Integer.parseInt(jtableProdutoVenda.getValueAt(i, 2).toString()));
-
-            //produto estoque
-            modelProduto.setPro_cod(codProduto);
-            modelProduto.setPro_estoque(controllerProduto.retornarProdutoController(codProduto).getPro_estoque()
-                    - Integer.parseInt(jtableProdutoVenda.getValueAt(i, 2).toString()));
-            listaModelVendaProdutos.add(modelVendaProduto);
-            listaModelProdutos.add(modelProduto);
-        }
-        //Salvar os produtos da venda TBLVENDA_PRODUTO
-        if (controllerVendaProduto.salvarVendaProdutoController(listaModelVendaProdutos)) {
-            //Alterar estoque de produtos
-            controllerProduto.alterarEstoqueProdutoController(listaModelProdutos);
-
-            JOptionPane.showMessageDialog(this, "Venda realizada com sucesso!", "ATENÇÃO", JOptionPane.INFORMATION_MESSAGE);
-            carregarVendas();
-            limparFormulario();
-        } else {
-            JOptionPane.showMessageDialog(this, "Erro ao cadastrar venda!", "ERRO", JOptionPane.ERROR_MESSAGE);
-        }
-
-    }//GEN-LAST:event_btSalvar1ActionPerformed
 
     private void btFinalizadaPedido1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFinalizadaPedido1ActionPerformed
         /*
@@ -1068,7 +1078,6 @@ public class ViewCadastroPedidoNova extends javax.swing.JFrame {
                 inicializaBotao();
                 limparFormulario();
                 habilitarDesabilitarCampo(false);
-                btSalvar1.setEnabled(false);
             } else {
                 JOptionPane.showMessageDialog(this, "Erro ao excluir venda!", "ERRO", JOptionPane.ERROR_MESSAGE);
             }
@@ -1244,7 +1253,6 @@ public class ViewCadastroPedidoNova extends javax.swing.JFrame {
     private javax.swing.JButton btNovo1;
     private javax.swing.JButton btRemover;
     private javax.swing.JButton btSalvaAlteracao;
-    private javax.swing.JButton btSalvar1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;

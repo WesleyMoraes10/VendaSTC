@@ -28,7 +28,7 @@ public class ControllerCreditoDebito {
     }
 
     
-    public ModelCreditoDebito retornaCreditoDebitoController(String cre_descricao) {
+    public ModelCreditoDebito retornaCreditoDebitoController(String cre_descricao, String tipo) {
         return this.daoCreditoDebito.retornarCreditoDebitoDAO(cre_descricao);
     }
 
@@ -45,7 +45,15 @@ public class ControllerCreditoDebito {
         return this.daoCreditoDebito.excluirCreditoDebitoDAO(cre_cod);
     }
     
-    public ArrayList<ModelCreditoDebito> retornartListaCredDebPorDataController(Date dataInicio, Date datFim){
+    public ArrayList<ModelCreditoDebito> retornartListaCredDebPorDataController(Date dataInicio, Date datFim, String tipoDespesa, String tipo){
+        return this.daoCreditoDebito.retornarListaPorDataCredDebDAO(dataInicio, datFim, tipoDespesa, tipo);
+    }
+
+    public ArrayList<ModelCreditoDebito> retornartListaCredDebPorDataFechamentoController(Date dataInicio, Date dataFim, String tipo) {
+        return this.daoCreditoDebito.retornarListaPorDataFechamentoDAO(dataInicio, dataFim, tipo);
+    }
+    
+     public ArrayList<ModelCreditoDebito> retornartListaCredDebPorDataController(Date dataInicio, Date datFim){
         return this.daoCreditoDebito.retornarListaPorDataCredDebDAO(dataInicio, datFim);
     }
     

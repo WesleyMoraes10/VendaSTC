@@ -2,6 +2,7 @@
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="undecorated" type="boolean" value="true"/>
   </Properties>
   <SyntheticProperties>
@@ -553,10 +554,8 @@
                       <Component id="btNovo1" linkSize="4" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btCancelar1" linkSize="4" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btSalvar1" linkSize="4" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel1" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="129" max="-2" attributes="0"/>
+                      <Component id="jLabel1" pref="429" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btFinalizadaPedido1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -575,7 +574,6 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="btNovo1" linkSize="3" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="btCancelar1" linkSize="3" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btSalvar1" linkSize="3" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Component id="jLabel2" alignment="0" min="-2" pref="52" max="-2" attributes="0"/>
@@ -607,17 +605,6 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCancelar1ActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="btSalvar1">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/icon32px/salvar.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Salvar"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btSalvar1ActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel1">
@@ -714,7 +701,7 @@
                     </Property>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jtablePedidos.setModel(tmVendas);&#xd;&#xa;        jtablePedidos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);&#xd;&#xa;        lmsVendas = jtablePedidos.getSelectionModel();&#xd;&#xa;        lmsVendas.addListSelectionListener(new ListSelectionListener() {&#xd;&#xa;            public void valueChanged(ListSelectionEvent e) {&#xd;&#xa;                if (! e.getValueIsAdjusting()){&#xd;&#xa;                    tblPedidoLinhaSelecionada(jtablePedidos);&#xd;&#xa;                        btSalvar1.setEnabled(false);&#xd;&#xa;                }&#xd;&#xa;            }&#xd;&#xa;        });"/>
+                    <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jtablePedidos.setModel(tmVendas);&#xd;&#xa;        jtablePedidos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);&#xd;&#xa;        lmsVendas = jtablePedidos.getSelectionModel();&#xd;&#xa;        lmsVendas.addListSelectionListener(new ListSelectionListener() {&#xd;&#xa;            public void valueChanged(ListSelectionEvent e) {&#xd;&#xa;                if (! e.getValueIsAdjusting()){&#xd;&#xa;                    tblPedidoLinhaSelecionada(jtablePedidos);&#xd;&#xa;                        &#xd;&#xa;                }&#xd;&#xa;            }&#xd;&#xa;        });"/>
                   </AuxValues>
                 </Component>
               </SubComponents>
@@ -739,7 +726,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btSalvaAlteracao" min="-2" pref="57" max="-2" attributes="0"/>
-                      <EmptySpace pref="111" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="btExcluir1" min="-2" pref="57" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>

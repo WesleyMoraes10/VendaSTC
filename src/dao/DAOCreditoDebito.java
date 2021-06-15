@@ -25,13 +25,17 @@ public class DAOCreditoDebito extends ConexaoMySql{
                     + "cre_valor,"
                     + "cre_tipo,"
                     + "cre_data,"
-                    + "cre_forma_paga"
+                    + "cre_forma_paga,"
+                    + "cre_cod_dispesa,"
+                    + "cre_tipo_despesa"
                     + ")VALUES ("
                     + "'" + modelCreditoDebito.getCre_descricao() +"',"
                     + "'" + modelCreditoDebito.getCre_valor() +"',"
                     + "'" + modelCreditoDebito.getCre_tipo() +"',"
                     + "'" + modelCreditoDebito.getCre_data() +"',"
-                    + "'" + modelCreditoDebito.getCre_forma_paga() +"'"
+                    + "'" + modelCreditoDebito.getCre_forma_paga() +"',"
+                    + "'" + modelCreditoDebito.getCre_cod_dispesa() +"',"
+                     + "'" + modelCreditoDebito.getCre_tipo_despesa() +"'"
                     + ");"
             
             );
@@ -62,6 +66,8 @@ public class DAOCreditoDebito extends ConexaoMySql{
                 modelCreditoDebito.setCre_tipo(this.getResultSet().getString(4));
                 modelCreditoDebito.setCre_data(this.getResultSet().getDate(5));
                 modelCreditoDebito.setCre_forma_paga(this.getResultSet().getString(6));
+                modelCreditoDebito.setCre_cod_dispesa(this.getResultSet().getInt(7));
+                modelCreditoDebito.setCre_tipo_despesa(this.getResultSet().getString(8));
             }
         }catch(Exception e){
             e.printStackTrace();
@@ -76,7 +82,8 @@ public class DAOCreditoDebito extends ConexaoMySql{
         ModelCreditoDebito modelCreditoDebito = new ModelCreditoDebito();
         try {
             this.conectar();
-            this.executarSQL("SELECT * FROM tblcreditodebito;");
+            this.executarSQL("SELECT * FROM tblcreditodebito "
+                            + "order by cre_cod DESC;");
 
             while(this.getResultSet().next()){
                 modelCreditoDebito = new ModelCreditoDebito();
@@ -86,6 +93,8 @@ public class DAOCreditoDebito extends ConexaoMySql{
                 modelCreditoDebito.setCre_tipo(this.getResultSet().getString(4));
                 modelCreditoDebito.setCre_data(this.getResultSet().getDate(5));
                 modelCreditoDebito.setCre_forma_paga(this.getResultSet().getString(6));
+                modelCreditoDebito.setCre_cod_dispesa(this.getResultSet().getInt(7));
+                modelCreditoDebito.setCre_tipo_despesa(this.getResultSet().getString(8));
                 listamodelCreditoDebito.add(modelCreditoDebito);
             }
         }catch(Exception e){
@@ -109,7 +118,9 @@ public class DAOCreditoDebito extends ConexaoMySql{
                     + "cre_valor = '" + modelCreditoDebito.getCre_valor() + "',"
                     + "cre_tipo = '" + modelCreditoDebito.getCre_tipo() + "',"
                     + "cre_data = '" + modelCreditoDebito.getCre_data() + "',"
-                    + "cre_forma_paga = '" + modelCreditoDebito.getCre_forma_paga() + "'"
+                    + "cre_forma_paga = '" + modelCreditoDebito.getCre_forma_paga() + "',"
+                    + "cre_cod_dispesa = '" + modelCreditoDebito.getCre_cod_dispesa() + "'"
+                    + "cre_tipo_despesa = '" + modelCreditoDebito.getCre_tipo_despesa() + "'"
                 + " WHERE "
                     + "cre_cod = '" + modelCreditoDebito.getCre_cod() + "'"
                 + ";"
@@ -149,7 +160,8 @@ public class DAOCreditoDebito extends ConexaoMySql{
         ModelCreditoDebito modelCreditoDebito = new ModelCreditoDebito();
         try {
             this.conectar();
-            this.executarSQL("SELECT * FROM tblcreditodebito WHERE cre_descricao = '"+cre_descricao+"';");
+            this.executarSQL("SELECT * FROM tblcreditodebito WHERE cre_descricao = '"+cre_descricao+"'"
+                                + ";");
 
             while(this.getResultSet().next()){
                  modelCreditoDebito.setCre_cod(this.getResultSet().getInt(1));
@@ -158,6 +170,8 @@ public class DAOCreditoDebito extends ConexaoMySql{
                 modelCreditoDebito.setCre_tipo(this.getResultSet().getString(4));
                 modelCreditoDebito.setCre_data(this.getResultSet().getDate(5));
                 modelCreditoDebito.setCre_forma_paga(this.getResultSet().getString(6));
+                modelCreditoDebito.setCre_cod_dispesa(this.getResultSet().getInt(7));
+                modelCreditoDebito.setCre_tipo_despesa(this.getResultSet().getString(8));
             }
         }catch(Exception e){
             e.printStackTrace();
@@ -165,6 +179,67 @@ public class DAOCreditoDebito extends ConexaoMySql{
             this.fecharConexao();
         }
         return modelCreditoDebito;
+    }
+    
+    public ArrayList<ModelCreditoDebito> retornarListaPorDataCredDebDAO(Date dataInicio, Date dataFim, String tipoDespesa, String tipo) {
+        ArrayList<ModelCreditoDebito> listamodelCreditoDebito = new ArrayList();
+        ModelCreditoDebito modelCreditoDebito = new ModelCreditoDebito();
+        try {
+            this.conectar();
+            this.executarSQL("SELECT *\n"
+                    + "FROM tblcreditodebito c \n"
+                    + "WHERE c.cre_data BETWEEN '"+dataInicio+"' AND '"+dataFim+"'"
+                    + "and c.cre_cod_dispesa = '"+tipoDespesa+"'"
+                            + "and c.cre_tipo = '"+tipo+"';");
+
+            while (this.getResultSet().next()) {
+                modelCreditoDebito = new ModelCreditoDebito();
+                modelCreditoDebito.setCre_cod(this.getResultSet().getInt(1));
+                modelCreditoDebito.setCre_descricao(this.getResultSet().getString(2));
+                modelCreditoDebito.setCre_valor(this.getResultSet().getDouble(3));
+                modelCreditoDebito.setCre_tipo(this.getResultSet().getString(4));
+                modelCreditoDebito.setCre_data(this.getResultSet().getDate(5));
+                modelCreditoDebito.setCre_forma_paga(this.getResultSet().getString(6));
+                modelCreditoDebito.setCre_cod_dispesa(this.getResultSet().getInt(7));
+                modelCreditoDebito.setCre_tipo_despesa(this.getResultSet().getString(8));
+                listamodelCreditoDebito.add(modelCreditoDebito);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            this.fecharConexao();
+        }
+        return listamodelCreditoDebito;
+    }
+
+    public ArrayList<ModelCreditoDebito> retornarListaPorDataFechamentoDAO(Date dataInicio, Date dataFim, String tipo) {
+        ArrayList<ModelCreditoDebito> listamodelCreditoDebito = new ArrayList();
+        ModelCreditoDebito modelCreditoDebito = new ModelCreditoDebito();
+        try {
+            this.conectar();
+            this.executarSQL("SELECT *\n"
+                    + "FROM tblcreditodebito c \n"
+                    + "WHERE c.cre_data BETWEEN '"+dataInicio+"' AND '"+dataFim+"'"
+                    + "and c.cre_tipo = '"+tipo+"';");
+
+            while (this.getResultSet().next()) {
+                modelCreditoDebito = new ModelCreditoDebito();
+                modelCreditoDebito.setCre_cod(this.getResultSet().getInt(1));
+                modelCreditoDebito.setCre_descricao(this.getResultSet().getString(2));
+                modelCreditoDebito.setCre_valor(this.getResultSet().getDouble(3));
+                modelCreditoDebito.setCre_tipo(this.getResultSet().getString(4));
+                modelCreditoDebito.setCre_data(this.getResultSet().getDate(5));
+                modelCreditoDebito.setCre_forma_paga(this.getResultSet().getString(6));
+                modelCreditoDebito.setCre_cod_dispesa(this.getResultSet().getInt(7));
+                modelCreditoDebito.setCre_tipo_despesa(this.getResultSet().getString(8));
+                listamodelCreditoDebito.add(modelCreditoDebito);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            this.fecharConexao();
+        }
+        return listamodelCreditoDebito;
     }
     
     public ArrayList<ModelCreditoDebito> retornarListaPorDataCredDebDAO(Date dataInicio, Date dataFim) {
@@ -193,5 +268,4 @@ public class DAOCreditoDebito extends ConexaoMySql{
         }
         return listamodelCreditoDebito;
     }
-    
 }

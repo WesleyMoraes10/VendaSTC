@@ -73,7 +73,18 @@ public class ViewPrincipal extends javax.swing.JFrame {
         jSeparator9 = new javax.swing.JPopupMenu.Separator();
         mnuVenda = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jSeparator3 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jSeparator4 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jSeparator10 = new javax.swing.JPopupMenu.Separator();
         jMenuItem5 = new javax.swing.JMenuItem();
+        jMenu6 = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jSeparator11 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem7 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
 
@@ -337,17 +348,77 @@ public class ViewPrincipal extends javax.swing.JFrame {
         jMenu5.add(mnuVenda);
         jMenu5.add(jSeparator1);
 
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon32px/credito.png"))); // NOI18N
+        jMenu1.setText("Crédito / Débito");
+        jMenu1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+
+        jMenuItem2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jMenuItem2.setText("Cadastrar tipo ");
+        jMenuItem2.setEnabled(false);
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem2);
+        jMenu1.add(jSeparator3);
+
+        jMenuItem3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jMenuItem3.setText("Cadastrar Crédito / Débito");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem3);
+        jMenu1.add(jSeparator4);
+
+        jMenuItem4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jMenuItem4.setText("Consultar ");
+        jMenuItem4.setEnabled(false);
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem4);
+        jMenu1.add(jSeparator10);
+
         jMenuItem5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon32px/credito.png"))); // NOI18N
-        jMenuItem5.setText("Crédito / Débito");
+        jMenuItem5.setText("Fechamento mês");
+        jMenuItem5.setEnabled(false);
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem5ActionPerformed(evt);
             }
         });
-        jMenu5.add(jMenuItem5);
+        jMenu1.add(jMenuItem5);
+
+        jMenu5.add(jMenu1);
 
         jMenuBar1.add(jMenu5);
+
+        jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon32px/dado 32.png"))); // NOI18N
+        jMenu6.setText("Banco de Dados");
+        jMenu6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+
+        jMenuItem6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon32px/backup 2 32.png"))); // NOI18N
+        jMenuItem6.setText("Backup Banco ");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem6);
+        jMenu6.add(jSeparator11);
+
+        jMenuItem7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon32px/Restaurar backup 32.png"))); // NOI18N
+        jMenuItem7.setText("Restauração Backup ");
+        jMenu6.add(jMenuItem7);
+
+        jMenuBar1.add(jMenu6);
 
         jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon32px/sair.png"))); // NOI18N
         jMenu3.setText("Sair Sistema...");
@@ -414,6 +485,10 @@ public class ViewPrincipal extends javax.swing.JFrame {
         ViewCadastroUsuario cadastroUsuario = new ViewCadastroUsuario();
         jdpPrincipal.add(cadastroUsuario);
         cadastroUsuario.setVisible(true);
+        
+        ViewCadastroDespesa cadastroDespesa = new ViewCadastroDespesa();
+        jdpPrincipal.add(cadastroDespesa);
+        cadastroDespesa.setVisible(true);
 
        
     }//GEN-LAST:event_btCadastrarProdutos1ActionPerformed
@@ -472,14 +547,39 @@ public class ViewPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuVendaActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-      this.dispose();
+      
+       this.dispose();
+        
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        ViewCreditoDebito creditoDebito = new ViewCreditoDebito();
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+       ViewCreditoDebito creditoDebito = new ViewCreditoDebito();
         jdpPrincipal.add(creditoDebito);
         creditoDebito.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        ViewCadastroDespesa cadastroDespesa = new ViewCadastroDespesa();
+        jdpPrincipal.add(cadastroDespesa);
+        cadastroDespesa.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+       ViewConsultaCreditoDebito consultaCreditoDebito = new ViewConsultaCreditoDebito();
+       jdpPrincipal.add(consultaCreditoDebito);
+       consultaCreditoDebito.setVisible(true);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        ViewFechamento fechamento = new ViewFechamento();
+        jdpPrincipal.add(fechamento);
+        fechamento.setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        ViewBackup viewBackup = new ViewBackup();
+        viewBackup.setVisible(true);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -523,13 +623,20 @@ public class ViewPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btCadastrarProdutos1;
     private javax.swing.JButton btCadastrarProdutos2;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel12;
@@ -538,7 +645,11 @@ public class ViewPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator10;
+    private javax.swing.JPopupMenu.Separator jSeparator11;
     private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JPopupMenu.Separator jSeparator3;
+    private javax.swing.JPopupMenu.Separator jSeparator4;
     private javax.swing.JPopupMenu.Separator jSeparator5;
     private javax.swing.JPopupMenu.Separator jSeparator6;
     private javax.swing.JPopupMenu.Separator jSeparator7;

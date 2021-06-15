@@ -11,8 +11,21 @@ import controller.ControllerProdutosVendasProdutos;
 import controller.ControllerVenda;
 import controller.ControllerVendaProduto;
 import controller.ControllerVendasCliente;
+import java.io.ByteArrayInputStream;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
+import javax.print.DocFlavor;
+import javax.print.DocPrintJob;
+import javax.print.PrintService;
+import javax.print.PrintServiceLookup;
+import javax.print.SimpleDoc;
+import javax.print.attribute.HashPrintRequestAttributeSet;
+import javax.print.attribute.PrintRequestAttributeSet;
+import javax.print.attribute.standard.JobName;
+import javax.print.attribute.standard.MediaSizeName;
+import javax.print.attribute.standard.OrientationRequested;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -25,6 +38,7 @@ import model.ModelProdutosVendasProdutos;
 import model.ModelVenda;
 import model.ModelVendaProduto;
 import model.ModelVendasCliente;
+import org.omg.CORBA.portable.InputStream;
 import util.FormatarData;
 
 /**
@@ -635,14 +649,88 @@ public class ViewResumPedido extends javax.swing.JFrame {
             abrePedido();
 
             JOptionPane.showMessageDialog(this, "Pedido Finalizado com sucesso!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE);
+            
+            //imprimirCupom(listaModelProdutosVendasProdutos, modelVenda);
 
             this.dispose();
 
         } else if (resposta == JOptionPane.NO_OPTION) {
             limparFormulario();
         }
+        
+        
     }
-
+    
+private void imprimirCupom(ArrayList<ModelProdutosVendasProdutos> listaModelProdutosVendasProdutos, ModelVenda modelVenda) {
+        
+        
+        String dataF = "dd/MM/yyyy";
+        String horaF = "H:mm -a";
+        String data, hora;
+        
+        //pega data
+        java.util.Date dataAtual = new java.util.Date();
+        SimpleDateFormat formata = new SimpleDateFormat(dataF);
+        data = formata.format(dataAtual);
+        
+        //pega hora
+        formata = new SimpleDateFormat(horaF);
+        hora = formata.format(dataAtual);
+        
+        String conteudoImpressao = "";
+        
+        for(int i=0; i<this.listaModelVendaProdutos.size(); i++){
+            conteudoImpressao += listaModelVendaProdutos.get(i).getVep_pro_quantidade()+"     "+
+                    listaModelVendaProdutos.get(i).getVep_pro_valor()+"   "+
+                    listaModelVendaProdutos.get(i).getNomeProduto()+"\n\r";
+        }
+        
+        this.imprimir("TEXT DE IMPRESSÃO DOS PRODUTOS \n\r"
+                + "-------------------------------\n\r"
+                + "          CUPOM NÃO FISCAL      \n\r"
+                + "-------------------------------\n\r"
+                + "Quat Valor    Produto\n\r"
+                + conteudoImpressao+""
+                + "-------------------------------\n\r" 
+                + "           Obrigado             \n\r"
+                + "\n\r \n\r \f"
+                
+        
+        );
+    }
+    
+    public void imprimir(String texto){
+        try {
+            //InputStream prin = new ByteArrayInputStream(texto.getBytes());
+            ByteArrayInputStream prin = new ByteArrayInputStream(texto.getBytes());
+            DocFlavor docFlavor = DocFlavor.INPUT_STREAM.AUTOSENSE;
+            SimpleDoc documentoTexto = new SimpleDoc(prin, docFlavor, null);
+            PrintService impressora = PrintServiceLookup.lookupDefaultPrintService();
+            
+            //pega impressora padrão
+            PrintRequestAttributeSet printRequestAttributeSet = new HashPrintRequestAttributeSet();
+            printRequestAttributeSet.add(new JobName("Impressao", null));
+            printRequestAttributeSet.add(OrientationRequested.PORTRAIT);
+            printRequestAttributeSet.add(MediaSizeName.ISO_A4);
+            
+            //informa tipo de folha
+            DocPrintJob printJob = impressora.createPrintJob();
+            
+            try {
+                printJob.print(documentoTexto, (PrintRequestAttributeSet)printRequestAttributeSet);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Não foi possivel realizar impressão!!", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+            
+            prin.close();
+            
+            
+        } catch (Exception e) {
+        }
+        
+    }
+    
+  
     private void jtfComandaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfComandaFocusLost
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfComandaFocusLost
@@ -736,4 +824,6 @@ public class ViewResumPedido extends javax.swing.JFrame {
     private javax.swing.JTextField jtfNumVenda;
     private javax.swing.JFormattedTextField jtfValorTotal;
     // End of variables declaration//GEN-END:variables
+
+    
 }

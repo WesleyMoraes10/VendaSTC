@@ -105,5 +105,8 @@ public class ControllerVenda {
         return this.daoVenda.alterarVendaEmListaDAO(listaModelVenda);
     }
     
+    public ModelVenda retornarVendaNumeroVendaController(String numMesa){
+        return this.daoVenda.retornarVendaNumeroVendaDAO(numMesa);
+    }
     
 }

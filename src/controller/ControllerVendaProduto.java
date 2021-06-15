@@ -65,4 +65,6 @@ public class ControllerVendaProduto {
     public boolean salvarVendaProdutoController(ArrayList<ModelVendaProduto> listaModelVendaProdutos) {
         return this.daoVendaProduto.salvarVendaProdutoDAO(listaModelVendaProdutos);
     }
+
+    
 }

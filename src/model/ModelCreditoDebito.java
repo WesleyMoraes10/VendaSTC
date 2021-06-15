@@ -19,6 +19,20 @@ public class ModelCreditoDebito {
     private String cre_tipo;
     private Date cre_data;
     private String cre_forma_paga;
+    private int cre_cod_dispesa;
+    private String cre_tipo_despesa;
+
+  
+    
+    public String getCre_tipo_despesa() {
+        return cre_tipo_despesa;
+    }
+
+    public void setCre_tipo_despesa(String cre_tipo_despesa) {
+        this.cre_tipo_despesa = cre_tipo_despesa;
+    }
+    
+    
 
     public int getCre_cod() {
         return cre_cod;
@@ -66,6 +80,14 @@ public class ModelCreditoDebito {
 
     public void setCre_forma_paga(String cre_forma_paga) {
         this.cre_forma_paga = cre_forma_paga;
+    }
+
+    public int getCre_cod_dispesa() {
+        return cre_cod_dispesa;
+    }
+
+    public void setCre_cod_dispesa(int cre_cod_dispesa) {
+        this.cre_cod_dispesa = cre_cod_dispesa;
     }
     
     

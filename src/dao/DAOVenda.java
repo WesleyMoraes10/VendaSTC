@@ -28,7 +28,7 @@ public class DAOVenda extends ConexaoMySql {
                     + "ven_desconto,"
                     + "ven_comanda,"
                     + "ven_status,"
-                    + "ven_nome_cliente"        
+                    + "ven_nome_cliente"
                     + ") VALUES ("
                     + "'" + modelVenda.getVen_cod_cliente() + "',"
                     + "'" + modelVenda.getVen_data() + "',"
@@ -37,7 +37,7 @@ public class DAOVenda extends ConexaoMySql {
                     + "'" + modelVenda.getVen_desconto() + "',"
                     + "'" + modelVenda.getVen_comanda() + "',"
                     + "'" + modelVenda.getVen_status() + "',"
-                    + "'" + modelVenda.getVen_nome_cliente() + "'"        
+                    + "'" + modelVenda.getVen_nome_cliente() + "'"
                     + ");"
             );
         } catch (Exception e) {
@@ -149,7 +149,7 @@ public class DAOVenda extends ConexaoMySql {
             this.executarSQL("SELECT *\n"
                     + "FROM tblvenda V \n"
                     + "WHERE V.ven_status = 'venda'\n"
-                    + "and V.ven_data BETWEEN '"+dataInicio+"' AND '"+dataFim+"';");
+                    + "and V.ven_data BETWEEN '" + dataInicio + "' AND '" + dataFim + "';");
 
             while (this.getResultSet().next()) {
                 modelVenda = new ModelVenda();
@@ -281,7 +281,7 @@ public class DAOVenda extends ConexaoMySql {
                     + "ven_desconto = '" + modelVenda.getVen_desconto() + "',"
                     + "ven_comanda = '" + modelVenda.getVen_comanda() + "',"
                     + "ven_status = '" + modelVenda.getVen_status() + "',"
-                    + "ven_nome_cliente = '" + modelVenda.getVen_nome_cliente()+ "'"
+                    + "ven_nome_cliente = '" + modelVenda.getVen_nome_cliente() + "'"
                     + " WHERE "
                     + "ven_cod = '" + modelVenda.getVen_cod() + "'"
                     + ";"
@@ -352,6 +352,27 @@ public class DAOVenda extends ConexaoMySql {
         } finally {
             this.fecharConexao();
         }
+    }
+
+    public ModelVenda retornarVendaNumeroVendaDAO(String numMesa) {
+        ModelVenda modelVenda = new ModelVenda();
+        try {
+            this.conectar();
+            this.executarSQL("SELECT v.ven_cod, v.ven_valor_liquido, v.ven_nome_cliente FROM tblvenda v\n"
+                    + "WHERE v.ven_comanda = '" + numMesa + "'\n"
+                    + "AND v.ven_status = 'pedido'");
+
+            while (this.getResultSet().next()) {
+                modelVenda.setVen_cod(this.getResultSet().getInt(1));
+                modelVenda.setVen_valor_liquido(this.getResultSet().getDouble(2));
+                modelVenda.setVen_nome_cliente(this.getResultSet().getString(3));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            this.fecharConexao();
+        }
+        return modelVenda;
     }
 
 }

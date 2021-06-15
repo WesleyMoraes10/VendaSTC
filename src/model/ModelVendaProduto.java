@@ -10,6 +10,7 @@ public class ModelVendaProduto {
     private int vep_cod_venda;
     private double vep_pro_valor;
     private int vep_pro_quantidade;
+    private String nomeProduto;
 
     public int getVep_cod() {
         return vep_cod;
@@ -50,6 +51,16 @@ public class ModelVendaProduto {
     public void setVep_pro_quantidade(int vep_pro_quantidade) {
         this.vep_pro_quantidade = vep_pro_quantidade;
     }
+
+    public String getNomeProduto() {
+        return nomeProduto;
+    }
+
+    public void setNomeProduto(String nomeProduto) {
+        this.nomeProduto = nomeProduto;
+    }
+    
+    
 
     
 }
