@@ -56,19 +56,21 @@ public class ViewPrincipal extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jdpPrincipal = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu2 = new javax.swing.JMenu();
+        nmenuFormaPagamento = new javax.swing.JMenu();
         mnuCliente = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem8 = new javax.swing.JMenuItem();
+        jSeparator12 = new javax.swing.JPopupMenu.Separator();
         mnuFornecedor = new javax.swing.JMenuItem();
-        jSeparator5 = new javax.swing.JPopupMenu.Separator();
-        mnuUsuario = new javax.swing.JMenuItem();
-        jSeparator6 = new javax.swing.JPopupMenu.Separator();
-        mnuPedido = new javax.swing.JMenuItem();
         jSeparator7 = new javax.swing.JPopupMenu.Separator();
         jMenu4 = new javax.swing.JMenu();
         mnuProduto = new javax.swing.JMenuItem();
         jSeparator8 = new javax.swing.JPopupMenu.Separator();
         mnuEntradaEstoque = new javax.swing.JMenuItem();
+        jSeparator6 = new javax.swing.JPopupMenu.Separator();
+        mnuUsuario = new javax.swing.JMenuItem();
+        jSeparator5 = new javax.swing.JPopupMenu.Separator();
+        mnuPedido = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jSeparator9 = new javax.swing.JPopupMenu.Separator();
         mnuVenda = new javax.swing.JMenuItem();
@@ -155,7 +157,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
             .addComponent(btCadastrarProdutos1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pedido", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
+        jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Venda", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 
         btCadastrarProdutos2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon32px/venda.png"))); // NOI18N
         btCadastrarProdutos2.addActionListener(new java.awt.event.ActionListener() {
@@ -256,9 +258,9 @@ public class ViewPrincipal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon32px/cadastro.png"))); // NOI18N
-        jMenu2.setText("Cadastro");
-        jMenu2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        nmenuFormaPagamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon32px/cadastro.png"))); // NOI18N
+        nmenuFormaPagamento.setText("Cadastro");
+        nmenuFormaPagamento.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
         mnuCliente.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         mnuCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon32px/cliente.png"))); // NOI18N
@@ -268,8 +270,19 @@ public class ViewPrincipal extends javax.swing.JFrame {
                 mnuClienteActionPerformed(evt);
             }
         });
-        jMenu2.add(mnuCliente);
-        jMenu2.add(jSeparator2);
+        nmenuFormaPagamento.add(mnuCliente);
+        nmenuFormaPagamento.add(jSeparator2);
+
+        jMenuItem8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon32px/forma pagament 32.png"))); // NOI18N
+        jMenuItem8.setText("Forma de Pagamento");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        nmenuFormaPagamento.add(jMenuItem8);
+        nmenuFormaPagamento.add(jSeparator12);
 
         mnuFornecedor.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         mnuFornecedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon32px/fonecedor.png"))); // NOI18N
@@ -279,30 +292,8 @@ public class ViewPrincipal extends javax.swing.JFrame {
                 mnuFornecedorActionPerformed(evt);
             }
         });
-        jMenu2.add(mnuFornecedor);
-        jMenu2.add(jSeparator5);
-
-        mnuUsuario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        mnuUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon32px/usuario.png"))); // NOI18N
-        mnuUsuario.setText("Usuário");
-        mnuUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuUsuarioActionPerformed(evt);
-            }
-        });
-        jMenu2.add(mnuUsuario);
-        jMenu2.add(jSeparator6);
-
-        mnuPedido.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        mnuPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon32px/venda.png"))); // NOI18N
-        mnuPedido.setText("Pedido");
-        mnuPedido.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuPedidoActionPerformed(evt);
-            }
-        });
-        jMenu2.add(mnuPedido);
-        jMenu2.add(jSeparator7);
+        nmenuFormaPagamento.add(mnuFornecedor);
+        nmenuFormaPagamento.add(jSeparator7);
 
         jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon32px/produto.png"))); // NOI18N
         jMenu4.setText("Produto");
@@ -328,9 +319,31 @@ public class ViewPrincipal extends javax.swing.JFrame {
         });
         jMenu4.add(mnuEntradaEstoque);
 
-        jMenu2.add(jMenu4);
+        nmenuFormaPagamento.add(jMenu4);
+        nmenuFormaPagamento.add(jSeparator6);
 
-        jMenuBar1.add(jMenu2);
+        mnuUsuario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        mnuUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon32px/usuario.png"))); // NOI18N
+        mnuUsuario.setText("Usuário");
+        mnuUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuUsuarioActionPerformed(evt);
+            }
+        });
+        nmenuFormaPagamento.add(mnuUsuario);
+        nmenuFormaPagamento.add(jSeparator5);
+
+        mnuPedido.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        mnuPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon32px/venda.png"))); // NOI18N
+        mnuPedido.setText("Venda");
+        mnuPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuPedidoActionPerformed(evt);
+            }
+        });
+        nmenuFormaPagamento.add(mnuPedido);
+
+        jMenuBar1.add(nmenuFormaPagamento);
 
         jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon32px/gerenciamento.png"))); // NOI18N
         jMenu5.setText("Gerenciamento");
@@ -529,9 +542,8 @@ public class ViewPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuUsuarioActionPerformed
 
     private void mnuPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuPedidoActionPerformed
-        ViewPDV viewPDV = new ViewPDV();
-        jdpPrincipal.add(viewPDV);
-        viewPDV.setVisible(true);
+        ViewCadastroPedidoNova viewCadastroPedidoNova = new ViewCadastroPedidoNova();
+        viewCadastroPedidoNova.setVisible(true);
     }//GEN-LAST:event_mnuPedidoActionPerformed
 
     private void mnuProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuProdutoActionPerformed
@@ -581,6 +593,12 @@ public class ViewPrincipal extends javax.swing.JFrame {
         viewBackup.setVisible(true);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        ViewCadastroFormPag viewCadastroFormPag = new ViewCadastroFormPag();
+        jdpPrincipal.add(viewCadastroFormPag);
+        viewCadastroFormPag.setVisible(true);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -624,7 +642,6 @@ public class ViewPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btCadastrarProdutos2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
@@ -637,6 +654,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel12;
@@ -647,6 +665,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator10;
     private javax.swing.JPopupMenu.Separator jSeparator11;
+    private javax.swing.JPopupMenu.Separator jSeparator12;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
@@ -663,5 +682,6 @@ public class ViewPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnuProduto;
     private javax.swing.JMenuItem mnuUsuario;
     private javax.swing.JMenuItem mnuVenda;
+    private javax.swing.JMenu nmenuFormaPagamento;
     // End of variables declaration//GEN-END:variables
 }

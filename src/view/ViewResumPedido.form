@@ -585,9 +585,9 @@
                   <Font name="Tahoma" size="14" style="1"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/icon/btpagamento.png"/>
+                  <Image iconType="3" name="/icon/money.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Finalizar Pedido"/>
+                <Property name="text" type="java.lang.String" value="Finalizar Venda"/>
                 <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="&quot;Efetivar Venda&quot;" type="code"/>
                 </Property>

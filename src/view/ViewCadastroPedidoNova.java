@@ -463,14 +463,16 @@ public class ViewCadastroPedidoNova extends javax.swing.JFrame {
         jPanel8.setBackground(new java.awt.Color(0, 0, 102));
         jPanel8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.lightGray, null, null));
 
+        btNovo1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btNovo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon32px/novo.png"))); // NOI18N
-        btNovo1.setText("Novo");
+        btNovo1.setText("Novo Lançamento");
         btNovo1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btNovo1ActionPerformed(evt);
             }
         });
 
+        btCancelar1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btCancelar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon32px/cancelar2.png"))); // NOI18N
         btCancelar1.setText("Cancelar");
         btCancelar1.addActionListener(new java.awt.event.ActionListener() {
@@ -491,6 +493,7 @@ public class ViewCadastroPedidoNova extends javax.swing.JFrame {
             }
         });
 
+        btFinalizadaPedido1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btFinalizadaPedido1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon68px/money p.png"))); // NOI18N
         btFinalizadaPedido1.setText("Finalizar Venda");
         btFinalizadaPedido1.setToolTipText("Efetivar Venda");
@@ -509,8 +512,8 @@ public class ViewCadastroPedidoNova extends javax.swing.JFrame {
                 .addComponent(btNovo1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btCancelar1)
-                .addGap(129, 129, 129)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btFinalizadaPedido1)
                 .addGap(18, 18, 18)
@@ -518,7 +521,7 @@ public class ViewCadastroPedidoNova extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel8Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btCancelar1, btNovo1});
+        jPanel8Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btCancelar1, btFinalizadaPedido1, btNovo1});
 
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -596,7 +599,7 @@ public class ViewCadastroPedidoNova extends javax.swing.JFrame {
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btSalvaAlteracao, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
                 .addComponent(btExcluir1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -1182,6 +1185,9 @@ public class ViewCadastroPedidoNova extends javax.swing.JFrame {
             //JOptionPane.showMessageDialog(this, "Produtos da venda salvo com sucesso", "Atenção", JOptionPane.WARNING_MESSAGE);
             carregarVendas();
             limparFormulario();
+            
+           
+            
         } else {
             JOptionPane.showMessageDialog(this, "Erro ao salbvar produtos da venda!", "ERRO", JOptionPane.ERROR_MESSAGE);
         }

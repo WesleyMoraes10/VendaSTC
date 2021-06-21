@@ -101,6 +101,7 @@ public class ViewResumPedido extends javax.swing.JFrame {
     ListSelectionModel lmsVendas;
 
     private ViewPagamento viewPagamento;
+    private ViewFormPagamento viewFormPagamento;
 
     /**
      * Creates new form ViewResumPedido
@@ -111,6 +112,7 @@ public class ViewResumPedido extends javax.swing.JFrame {
         carregarVendas();
         habilitarDesabilitarCampo(false);
         this.viewPagamento = new ViewPagamento();
+        this.viewFormPagamento = new ViewFormPagamento();
     }
 
     /**
@@ -410,8 +412,8 @@ public class ViewResumPedido extends javax.swing.JFrame {
         jPanel9.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), null, null));
 
         btFinalizadaPedido1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btFinalizadaPedido1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/btpagamento.png"))); // NOI18N
-        btFinalizadaPedido1.setText("Finalizar Pedido");
+        btFinalizadaPedido1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/money.png"))); // NOI18N
+        btFinalizadaPedido1.setText("Finalizar Venda");
         btFinalizadaPedido1.setToolTipText("Efetivar Venda");
         btFinalizadaPedido1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -633,9 +635,9 @@ public class ViewResumPedido extends javax.swing.JFrame {
         int codigoMesa = (int) jtablePedidos.getValueAt(linha, 1);
         String cliente = (String) jtablePedidos.getValueAt(linha, 2);
 
-        int resposta = JOptionPane.showConfirmDialog(this, "DESEJA FINALIZAR O PEDIDO " 
-                +" DA MESA '"+codigoMesa + "' E "
-                +" DO CLIENTE '"+cliente+"' ? ", "Confirmação",
+        int resposta = JOptionPane.showConfirmDialog(this, "DESEJA FINALIZAR O PEDIDO "
+                + " DA MESA '" + codigoMesa + "' E "
+                + " DO CLIENTE '" + cliente + "' ? ", "Confirmação",
                 JOptionPane.YES_NO_OPTION);
         if (resposta == JOptionPane.YES_OPTION) {
             modelVenda = controllerVenda.retornarVendaController(codigoVenda);
@@ -649,88 +651,87 @@ public class ViewResumPedido extends javax.swing.JFrame {
             abrePedido();
 
             JOptionPane.showMessageDialog(this, "Pedido Finalizado com sucesso!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE);
-            
-            //imprimirCupom(listaModelProdutosVendasProdutos, modelVenda);
 
+            //imprimirCupom(listaModelProdutosVendasProdutos, modelVenda);
             this.dispose();
 
         } else if (resposta == JOptionPane.NO_OPTION) {
             limparFormulario();
         }
-        
-        
+
     }
-    
-private void imprimirCupom(ArrayList<ModelProdutosVendasProdutos> listaModelProdutosVendasProdutos, ModelVenda modelVenda) {
-        
-        
+
+    private void imprimirCupom(ArrayList<ModelProdutosVendasProdutos> listaModelProdutosVendasProdutos, ModelVenda modelVenda) {
+
         String dataF = "dd/MM/yyyy";
         String horaF = "H:mm -a";
         String data, hora;
-        
+
         //pega data
         java.util.Date dataAtual = new java.util.Date();
         SimpleDateFormat formata = new SimpleDateFormat(dataF);
         data = formata.format(dataAtual);
-        
+
         //pega hora
         formata = new SimpleDateFormat(horaF);
         hora = formata.format(dataAtual);
-        
+
         String conteudoImpressao = "";
-        
-        for(int i=0; i<this.listaModelVendaProdutos.size(); i++){
-            conteudoImpressao += listaModelVendaProdutos.get(i).getVep_pro_quantidade()+"     "+
-                    listaModelVendaProdutos.get(i).getVep_pro_valor()+"   "+
-                    listaModelVendaProdutos.get(i).getNomeProduto()+"\n\r";
+
+        for (int i = 0; i < this.listaModelVendaProdutos.size(); i++) {
+            conteudoImpressao += listaModelVendaProdutos.get(i).getVep_pro_quantidade() + "     "
+                    + listaModelVendaProdutos.get(i).getVep_pro_valor() + "   "
+                    + listaModelVendaProdutos.get(i).getNomeProduto() + "\n\r";
         }
-        
+
         this.imprimir("TEXT DE IMPRESSÃO DOS PRODUTOS \n\r"
                 + "-------------------------------\n\r"
                 + "          CUPOM NÃO FISCAL      \n\r"
                 + "-------------------------------\n\r"
                 + "Quat Valor    Produto\n\r"
-                + conteudoImpressao+""
-                + "-------------------------------\n\r" 
+                + conteudoImpressao + ""
+                + "-------------------------------\n\r"
                 + "           Obrigado             \n\r"
                 + "\n\r \n\r \f"
-                
-        
         );
     }
-    
-    public void imprimir(String texto){
+
+    public void imprimir(String texto) {
         try {
             //InputStream prin = new ByteArrayInputStream(texto.getBytes());
             ByteArrayInputStream prin = new ByteArrayInputStream(texto.getBytes());
             DocFlavor docFlavor = DocFlavor.INPUT_STREAM.AUTOSENSE;
             SimpleDoc documentoTexto = new SimpleDoc(prin, docFlavor, null);
             PrintService impressora = PrintServiceLookup.lookupDefaultPrintService();
-            
+
             //pega impressora padrão
             PrintRequestAttributeSet printRequestAttributeSet = new HashPrintRequestAttributeSet();
             printRequestAttributeSet.add(new JobName("Impressao", null));
             printRequestAttributeSet.add(OrientationRequested.PORTRAIT);
             printRequestAttributeSet.add(MediaSizeName.ISO_A4);
-            
+
             //informa tipo de folha
             DocPrintJob printJob = impressora.createPrintJob();
-            
+
             try {
-                printJob.print(documentoTexto, (PrintRequestAttributeSet)printRequestAttributeSet);
+                printJob.print(documentoTexto, (PrintRequestAttributeSet) printRequestAttributeSet);
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Não foi possivel realizar impressão!!", "Erro", JOptionPane.ERROR_MESSAGE);
             }
-            
+
             prin.close();
-            
-            
+
         } catch (Exception e) {
         }
-        
+
     }
-    
-  
+
+    public void chamaFormaPagamento() {
+        ViewFormPagamento viewFormPagamento = new ViewFormPagamento();
+        viewFormPagamento.setVisible(true);
+    }
+
+
     private void jtfComandaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfComandaFocusLost
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfComandaFocusLost
@@ -744,7 +745,20 @@ private void imprimirCupom(ArrayList<ModelProdutosVendasProdutos> listaModelProd
     }//GEN-LAST:event_jtfValorTotalActionPerformed
 
     private void btFinalizadaPedido1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFinalizadaPedido1ActionPerformed
-        finalizadaPedido();       
+        //finalizadaPedido(); 
+        //this.dispose();
+        //chamaFormaPagamento();
+
+        if (jtfNumVenda.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Selecione uma Venda!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE);
+        } else {
+            viewFormPagamento.setValorTotal(Double.parseDouble(jtfValorTotal.getText()));
+            viewFormPagamento.setNumVenda(Integer.parseInt(jtfNumVenda.getText()));
+            viewFormPagamento.setTFSubtotal();
+            viewFormPagamento.setTFNumVenda();
+            viewFormPagamento.setVisible(true);
+        }
+
 
     }//GEN-LAST:event_btFinalizadaPedido1ActionPerformed
 
@@ -758,8 +772,8 @@ private void imprimirCupom(ArrayList<ModelProdutosVendasProdutos> listaModelProd
     }//GEN-LAST:event_jtfClienteFocusLost
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-       
-        viewPagamento.setValorTotal(Double.parseDouble(jtfValorTotal.getText()));  
+
+        viewPagamento.setValorTotal(Double.parseDouble(jtfValorTotal.getText()));
         viewPagamento.setTFValorToral();
         viewPagamento.setVisible(true);
     }//GEN-LAST:event_jLabel3MouseClicked
@@ -825,5 +839,4 @@ private void imprimirCupom(ArrayList<ModelProdutosVendasProdutos> listaModelProd
     private javax.swing.JFormattedTextField jtfValorTotal;
     // End of variables declaration//GEN-END:variables
 
-    
 }

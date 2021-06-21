@@ -32,6 +32,7 @@ import javax.print.attribute.PrintRequestAttributeSet;
 import javax.print.attribute.standard.JobName;
 import javax.print.attribute.standard.MediaSizeName;
 import javax.print.attribute.standard.OrientationRequested;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -114,7 +115,8 @@ public class ViewLancaPedido extends javax.swing.JFrame {
      * Creates new form ViewLancaPedido
      */
     public ViewLancaPedido() {
-        initComponents();
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        initComponents();        
         listarClientes();
         listarProdutos();
         preencherCodigoProdutoComboBox();
@@ -350,7 +352,7 @@ public class ViewLancaPedido extends javax.swing.JFrame {
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addComponent(jLabel15)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jcbProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE))
+                            .addComponent(jcbProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel16)
@@ -372,7 +374,7 @@ public class ViewLancaPedido extends javax.swing.JFrame {
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addComponent(jLabel17)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jcbCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jcbCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE))
                         .addGap(116, 116, 116)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel18)
@@ -421,7 +423,7 @@ public class ViewLancaPedido extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jtfQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -503,13 +505,15 @@ public class ViewLancaPedido extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -623,6 +627,7 @@ public class ViewLancaPedido extends javax.swing.JFrame {
                 + "-------------------------------\n\r"
                 + "          PEDIDOS      \n\r"
                 + "Mesa: " + modelVenda.getVen_comanda() + "\n\r"
+                + "Cliente: " + modelVenda.getVen_nome_cliente() + "\n\r"
                 + "-------------------------------\n\r"
                 + "Quat Valor  Produto\n\r"
                 + conteudoImpressao + ""
@@ -851,6 +856,7 @@ public class ViewLancaPedido extends javax.swing.JFrame {
                 modelVendaProduto.setVep_cod_venda(Integer.parseInt(jtfNumVenda.getText()));
                 modelVendaProduto.setVep_pro_valor((double) jtableProdutoVenda.getValueAt(i, 3));
                 modelVendaProduto.setVep_pro_quantidade(Integer.parseInt(jtableProdutoVenda.getValueAt(i, 2).toString()));
+                modelVendaProduto.setNomeProduto(jtableProdutoVenda.getValueAt(i, 1).toString());
 
                 //produto estoque
                 modelProduto.setPro_cod(codProduto);
@@ -860,7 +866,7 @@ public class ViewLancaPedido extends javax.swing.JFrame {
                 listaModelProdutos.add(modelProduto);
             }
 
-            //salvar produtos da venda
+            //salvar produtos da venda 
             if (controllerVendaProduto.salvarVendaProdutoController(listaModelVendaProdutos)) {
                 //JOptionPane.showMessageDialog(this, "Produtos da venda salvo com sucesso", "Atenção", JOptionPane.WARNING_MESSAGE);
                 //carregarVendas();
