@@ -21,6 +21,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import model.ModelCliente;
+import model.ModelContaVenda;
 import model.ModelProduto;
 import model.ModelProdutosVendasProdutos;
 import model.ModelVenda;
@@ -64,6 +65,8 @@ public class ViewConsultaVenda extends javax.swing.JInternalFrame {
      */
     ArrayList<ModelVenda> listaModelVenda = new ArrayList<>();
     ModelVenda modelVenda = new ModelVenda();
+    
+    ArrayList<ModelContaVenda> listaModelContaVenda = new ArrayList<>();
 
     /**
      * Formatação de data
@@ -89,7 +92,7 @@ public class ViewConsultaVenda extends javax.swing.JInternalFrame {
      */
     String salvarAlterar;
 
-    DefaultTableModel tmVendas = new DefaultTableModel(null, new String[]{"Id", "N.°Mesa", "Cliente", "Valor Venda R$"});
+    DefaultTableModel tmVendas = new DefaultTableModel(null, new String[]{"N.° Venda", "N.°Mesa", "Cliente", "Forma Pagamento", "Observação", "R$ Valor Pago"});
     ListSelectionModel lmsVendas;
 
     ConectaBanco conectaBanco = new ConectaBanco();
@@ -130,17 +133,19 @@ public class ViewConsultaVenda extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
+        setResizable(true);
+        setTitle("Conta de Vendas por Data");
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.lightGray, null, null));
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Vendas por período", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), java.awt.SystemColor.textHighlight)); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Vendas por período", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(102, 102, 102))); // NOI18N
         jPanel1.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
 
-        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel17.setText("Data Inicio / Fim");
 
-        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel18.setText("De:");
 
         try {
@@ -148,8 +153,9 @@ public class ViewConsultaVenda extends javax.swing.JInternalFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jtfDataInicio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jLabel19.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel19.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel19.setText("Até:");
 
         try {
@@ -157,7 +163,9 @@ public class ViewConsultaVenda extends javax.swing.JInternalFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jtfDataFim.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
+        btPesquisa.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btPesquisa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon32px/pesquisar.png"))); // NOI18N
         btPesquisa.setText("Pequisar");
         btPesquisa.addActionListener(new java.awt.event.ActionListener() {
@@ -214,10 +222,10 @@ public class ViewConsultaVenda extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel17)
-                        .addGap(0, 579, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(2, 2, 2)
                         .addComponent(jLabel18)
@@ -247,13 +255,13 @@ public class ViewConsultaVenda extends javax.swing.JInternalFrame {
                     .addComponent(jtfDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtfDataFim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        jPanel11.setBackground(new java.awt.Color(0, 0, 102));
+        jPanel11.setBackground(new java.awt.Color(102, 102, 102));
         jPanel11.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.lightGray, null, null));
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
@@ -267,7 +275,7 @@ public class ViewConsultaVenda extends javax.swing.JInternalFrame {
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 947, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel11Layout.setVerticalGroup(
@@ -286,9 +294,7 @@ public class ViewConsultaVenda extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -423,16 +429,20 @@ public class ViewConsultaVenda extends javax.swing.JInternalFrame {
             listaModelVendasCliente = controllerVendasCliente.retornaListaVendasCliente();
             //listaModelVenda = controllerVenda.retornartListaVendaController();
 
-            listaModelVenda = controllerVenda.retornartListaVendaPorDataController(dataInicio, dataFim);
+            //listaModelVenda = controllerVenda.retornartListaVendaPorDataController(dataInicio, dataFim);
+            
+            listaModelContaVenda = controllerVenda.retornartListaVendaPorDataFormaPagamentoController(dataInicio, dataFim);
             
             modelo.setNumRows(0);
-            int cont = listaModelVenda.size();
+            int cont = listaModelContaVenda.size();
             for (int i = 0; i < cont; i++) {
                 modelo.addRow(new Object[]{
-                    listaModelVenda.get(i).getVen_cod(),
-                    listaModelVenda.get(i).getVen_comanda(),
-                    listaModelVenda.get(i).getVen_nome_cliente(),
-                    listaModelVenda.get(i).getVen_valor_liquido()
+                    listaModelContaVenda.get(i).getVen_cod(),
+                    listaModelContaVenda.get(i).getVen_comanda(),
+                    listaModelContaVenda.get(i).getVen_nome_cliente(),
+                    listaModelContaVenda.get(i).getVfp_desc_formapagamento(),
+                    listaModelContaVenda.get(i).getVfp_observacao(),
+                    listaModelContaVenda.get(i).getVfp_valor_pagamento()
                 });
             }
 

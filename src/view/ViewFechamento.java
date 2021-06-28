@@ -73,6 +73,9 @@ public class ViewFechamento extends javax.swing.JInternalFrame {
         btPesquisar = new javax.swing.JButton();
 
         setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
         setTitle("Fechamento");
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));

@@ -4,6 +4,7 @@ import model.ModelVenda;
 import conexoes.ConexaoMySql;
 import java.sql.Date;
 import java.util.ArrayList;
+import model.ModelContaVenda;
 
 /**
  *
@@ -375,4 +376,54 @@ public class DAOVenda extends ConexaoMySql {
         return modelVenda;
     }
 
+    public ArrayList<ModelContaVenda> retornarListaPorDataVendaFormaparamentoDAO(Date dataInicio, Date dataFim) {
+        ArrayList<ModelContaVenda> listaModelContaVenda = new ArrayList();
+        ModelContaVenda modelContaVenda = new ModelContaVenda();
+        try {
+            this.conectar();
+            this.executarSQL("SELECT \n"
+                    + "V.ven_cod,\n"
+                    + "V.ven_comanda,\n"
+                    + "V.ven_nome_cliente,\n"
+                    + "F.vfp_desc_formapagamento,\n"
+                    + "F.vfp_observacao,\n"
+                    + "F.vfp_valor_pagamento\n"
+                    + "FROM tblvenda V \n"
+                    + "INNER JOIN tblvendaformapagamento F ON F.vfp_num_venda = V.ven_cod\n"
+                    + "WHERE V.ven_status = 'venda'\n"
+                    + "and V.ven_data BETWEEN '"+ dataInicio +"' AND '"+ dataFim +"';");
+
+            while (this.getResultSet().next()) {
+                modelContaVenda = new ModelContaVenda();
+                modelContaVenda.setVen_cod(this.getResultSet().getInt(1));
+                modelContaVenda.setVen_comanda(this.getResultSet().getInt(2));
+                modelContaVenda.setVen_nome_cliente(this.getResultSet().getString(3));
+                modelContaVenda.setVfp_desc_formapagamento(this.getResultSet().getString(4));
+                modelContaVenda.setVfp_observacao(this.getResultSet().getString(5));
+                modelContaVenda.setVfp_valor_pagamento(this.getResultSet().getDouble(6));
+                listaModelContaVenda.add(modelContaVenda);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            this.fecharConexao();
+        }
+        return listaModelContaVenda;
+    }
+
 }
+
+/*
+SELECT 
+V.ven_cod,
+V.ven_comanda,
+V.ven_nome_cliente,
+F.vfp_num_venda,
+F.vfp_desc_formapagamento,
+F.vfp_observacao,
+F.vfp_valor_pagamento
+FROM tblvenda V 
+INNER JOIN tblvendaformapagamento F ON F.vfp_num_venda = V.ven_cod
+WHERE V.ven_status = 'venda'
+and V.ven_data BETWEEN '2021-06-25' AND '2021-06-25';
+*/

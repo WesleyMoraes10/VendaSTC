@@ -86,6 +86,9 @@ public class ViewCreditoDebito extends javax.swing.JInternalFrame {
         btSalvar = new javax.swing.JButton();
 
         setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
         setTitle("Gerenciamento Crédito e Débito");
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -268,7 +271,7 @@ public class ViewCreditoDebito extends javax.swing.JInternalFrame {
                     .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
-        jPanel2.setBackground(new java.awt.Color(0, 0, 102));
+        jPanel2.setBackground(new java.awt.Color(102, 102, 102));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(153, 153, 153), null));
 
         btAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon32px/editar.png"))); // NOI18N

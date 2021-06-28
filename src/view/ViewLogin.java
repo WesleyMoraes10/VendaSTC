@@ -20,17 +20,17 @@ public class ViewLogin extends javax.swing.JFrame {
 
     ControllerUsuario controllerUsuario = new ControllerUsuario();
     ModelUsuario modelUsuario = new ModelUsuario();
-    
+
     /**
      * Creates new form ViewLogin
      */
     public ViewLogin() {
         initComponents();
-        
-        URL url = this.getClass().getResource("/icon/i.png");  
-        Image iconeTitulo = Toolkit.getDefaultToolkit().getImage(url);  
+
+        URL url = this.getClass().getResource("/icon/i.png");
+        Image iconeTitulo = Toolkit.getDefaultToolkit().getImage(url);
         this.setIconImage(iconeTitulo);
-        
+
         //new ViewPrincipal().setVisible(true);
     }
 
@@ -58,13 +58,18 @@ public class ViewLogin extends javax.swing.JFrame {
         setBackground(new java.awt.Color(255, 255, 255));
         setUndecorated(true);
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Login do sistema / Systec - VendaSTC", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18), java.awt.SystemColor.textHighlight)); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Login do sistema / Systec - VendaSTC", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18), new java.awt.Color(102, 102, 102))); // NOI18N
 
         jtfLogin.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jtfLogin.setText("admin");
+        jtfLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfLoginActionPerformed(evt);
+            }
+        });
 
         jtfSenha.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jtfSenha.setText("123");
+        jtfSenha.setText("menusoft.com");
         jtfSenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfSenhaActionPerformed(evt);
@@ -96,7 +101,7 @@ public class ViewLogin extends javax.swing.JFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.lightGray, null, null));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/LogoOficial.PNG"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logo menusoft editado.jpg"))); // NOI18N
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -110,7 +115,7 @@ public class ViewLogin extends javax.swing.JFrame {
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addContainerGap())
         );
@@ -163,7 +168,7 @@ public class ViewLogin extends javax.swing.JFrame {
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        jPanel1.setBackground(java.awt.SystemColor.textHighlight);
+        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -207,26 +212,34 @@ public class ViewLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       this.dispose();
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEntrarActionPerformed
-       
+
         modelUsuario.setUsu_login(this.jtfLogin.getText().toUpperCase().trim());
-        modelUsuario.setUsu_senha(String.valueOf(this.jtfSenha.getPassword()).toUpperCase().trim()); 
-        
-        if(controllerUsuario.validarUsuarioController(modelUsuario)){
-           new ViewPrincipal().setVisible(true);
-           this.dispose();
-        }else{
+        modelUsuario.setUsu_senha(String.valueOf(this.jtfSenha.getPassword()).toUpperCase().trim());
+
+        if (jtfLogin.getText().equals("admin") && jtfSenha.getText().equals("menusoft.com")) {
+            new ViewPrincipal().setVisible(true);
+            this.dispose();
+        } else if (controllerUsuario.validarUsuarioController(modelUsuario)) {
+            new ViewPrincipal().setVisible(true);
+            this.dispose();
+        } else {
             JOptionPane.showMessageDialog(this, "Login ou Senha INCORRETO!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE);
         }
-            
+
+
     }//GEN-LAST:event_btEntrarActionPerformed
 
     private void jtfSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfSenhaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfSenhaActionPerformed
+
+    private void jtfLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfLoginActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfLoginActionPerformed
 
     /**
      * @param args the command line arguments

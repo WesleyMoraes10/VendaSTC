@@ -4,6 +4,7 @@ import model.ModelVenda;
 import DAO.DAOVenda;
 import java.sql.Date;
 import java.util.ArrayList;
+import model.ModelContaVenda;
 
 /**
 *
@@ -57,6 +58,11 @@ public class ControllerVenda {
     public ArrayList<ModelVenda> retornartListaVendaPorDataController(Date dataInicio, Date datFim){
         return this.daoVenda.retornarListaPorDataVendaDAO(dataInicio, datFim);
     }
+    
+    public ArrayList<ModelContaVenda> retornartListaVendaPorDataFormaPagamentoController(Date dataInicio, Date datFim){
+        return this.daoVenda.retornarListaPorDataVendaFormaparamentoDAO(dataInicio, datFim);
+    }
+    
     
     /**
     * recupera uma lista deVenda

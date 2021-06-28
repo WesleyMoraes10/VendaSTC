@@ -366,7 +366,7 @@
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
             <TitledBorder justification="2" title="Op&#xe7;&#xf5;es ">
               <Font PropertyName="font" name="Tahoma" size="15" style="1"/>
-              <Color PropertyName="color" blue="d7" green="78" id="Realce de Texto" palette="2" red="0" type="palette"/>
+              <Color PropertyName="color" blue="66" green="66" red="66" type="rgb"/>
             </TitledBorder>
           </Border>
         </Property>
@@ -492,24 +492,24 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btCadastrarProdutos1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="btCadastrarUsuario" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btCadastrarProdutos1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="btCadastrarUsuario" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="btCadastrarProdutos1">
+            <Component class="javax.swing.JButton" name="btCadastrarUsuario">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/icon32px/usuario.png"/>
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCadastrarProdutos1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCadastrarUsuarioActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
@@ -591,7 +591,7 @@
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/img/LogoOficial.PNG"/>
+          <Image iconType="3" name="/img/logo menusoft editado.jpg"/>
         </Property>
       </Properties>
     </Component>
@@ -604,7 +604,7 @@
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
             <TitledBorder justification="2" title="VendaSTC / Systec - Solu&#xe7;&#xf5;es em Tecnologia">
               <Font PropertyName="font" name="Tahoma" size="16" style="1"/>
-              <Color PropertyName="color" blue="d7" green="78" id="Realce de Texto" palette="2" red="0" type="palette"/>
+              <Color PropertyName="color" blue="66" green="66" red="66" type="rgb"/>
             </TitledBorder>
           </Border>
         </Property>
@@ -631,6 +631,14 @@
       </Layout>
       <SubComponents>
         <Container class="javax.swing.JDesktopPane" name="jdpPrincipal">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="66" green="66" red="66" type="rgb"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="66" green="66" red="66" type="rgb"/>
+            </Property>
+          </Properties>
 
           <Layout>
             <DimensionLayout dim="0">

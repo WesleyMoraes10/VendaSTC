@@ -8,7 +8,10 @@ package view;
 import java.awt.Frame;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.beans.PropertyVetoException;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import viewModelo.ViewModelo;
@@ -47,7 +50,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
         jPanel8 = new javax.swing.JPanel();
         btCadastrarProdutos = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
-        btCadastrarProdutos1 = new javax.swing.JButton();
+        btCadastrarUsuario = new javax.swing.JButton();
         jPanel12 = new javax.swing.JPanel();
         btCadastrarProdutos2 = new javax.swing.JButton();
         jPanel13 = new javax.swing.JPanel();
@@ -95,7 +98,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
         setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Opções ", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 15), java.awt.SystemColor.textHighlight)); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Opções ", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 15), new java.awt.Color(102, 102, 102))); // NOI18N
 
         jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cliente", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 
@@ -139,10 +142,10 @@ public class ViewPrincipal extends javax.swing.JFrame {
 
         jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Usuário", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 
-        btCadastrarProdutos1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon32px/usuario.png"))); // NOI18N
-        btCadastrarProdutos1.addActionListener(new java.awt.event.ActionListener() {
+        btCadastrarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon32px/usuario.png"))); // NOI18N
+        btCadastrarUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCadastrarProdutos1ActionPerformed(evt);
+                btCadastrarUsuarioActionPerformed(evt);
             }
         });
 
@@ -150,11 +153,11 @@ public class ViewPrincipal extends javax.swing.JFrame {
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btCadastrarProdutos1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btCadastrarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btCadastrarProdutos1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btCadastrarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Venda", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
@@ -226,10 +229,13 @@ public class ViewPrincipal extends javax.swing.JFrame {
                 .addContainerGap(139, Short.MAX_VALUE))
         );
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/LogoOficial.PNG"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logo menusoft editado.jpg"))); // NOI18N
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "VendaSTC / Systec - Soluções em Tecnologia", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 16), java.awt.SystemColor.textHighlight)); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "VendaSTC / Systec - Soluções em Tecnologia", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 16), new java.awt.Color(102, 102, 102))); // NOI18N
+
+        jdpPrincipal.setBackground(new java.awt.Color(102, 102, 102));
+        jdpPrincipal.setForeground(new java.awt.Color(102, 102, 102));
 
         javax.swing.GroupLayout jdpPrincipalLayout = new javax.swing.GroupLayout(jdpPrincipal);
         jdpPrincipal.setLayout(jdpPrincipalLayout);
@@ -494,20 +500,17 @@ public class ViewPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btCadastrarProdutosActionPerformed
 
-    private void btCadastrarProdutos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarProdutos1ActionPerformed
+    private void btCadastrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarUsuarioActionPerformed
+
         ViewCadastroUsuario cadastroUsuario = new ViewCadastroUsuario();
         jdpPrincipal.add(cadastroUsuario);
         cadastroUsuario.setVisible(true);
-        
-        ViewCadastroDespesa cadastroDespesa = new ViewCadastroDespesa();
-        jdpPrincipal.add(cadastroDespesa);
-        cadastroDespesa.setVisible(true);
 
-       
-    }//GEN-LAST:event_btCadastrarProdutos1ActionPerformed
+
+    }//GEN-LAST:event_btCadastrarUsuarioActionPerformed
 
     private void btCadastrarProdutos2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarProdutos2ActionPerformed
-        ViewCadastroPedidoNova cadastroPedido = new ViewCadastroPedidoNova();       
+        ViewCadastroPedidoNova cadastroPedido = new ViewCadastroPedidoNova();
         cadastroPedido.setVisible(true);
     }//GEN-LAST:event_btCadastrarProdutos2ActionPerformed
 
@@ -524,6 +527,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuEntradaEstoqueActionPerformed
 
     private void mnuClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuClienteActionPerformed
+        
         ViewCadastroCliente cadastroCliente = new ViewCadastroCliente();
         jdpPrincipal.add(cadastroCliente);
         cadastroCliente.setVisible(true);
@@ -553,19 +557,25 @@ public class ViewPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuProdutoActionPerformed
 
     private void mnuVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuVendaActionPerformed
-        ViewConsultaVenda consultaVenda = new ViewConsultaVenda();
-        jdpPrincipal.add(consultaVenda);
-        consultaVenda.setVisible(true);
+        try {
+            ViewConsultaVenda consultaVenda = new ViewConsultaVenda();
+            jdpPrincipal.add(consultaVenda);
+            consultaVenda.setMaximum(true);
+            consultaVenda.setVisible(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(ViewPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_mnuVendaActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-      
-       this.dispose();
-        
+
+        this.dispose();
+
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-       ViewCreditoDebito creditoDebito = new ViewCreditoDebito();
+        ViewCreditoDebito creditoDebito = new ViewCreditoDebito();
         jdpPrincipal.add(creditoDebito);
         creditoDebito.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
@@ -577,9 +587,9 @@ public class ViewPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-       ViewConsultaCreditoDebito consultaCreditoDebito = new ViewConsultaCreditoDebito();
-       jdpPrincipal.add(consultaCreditoDebito);
-       consultaCreditoDebito.setVisible(true);
+        ViewConsultaCreditoDebito consultaCreditoDebito = new ViewConsultaCreditoDebito();
+        jdpPrincipal.add(consultaCreditoDebito);
+        consultaCreditoDebito.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
@@ -638,8 +648,8 @@ public class ViewPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btCadastrarClientes;
     private javax.swing.JButton btCadastrarFornecedor;
     private javax.swing.JButton btCadastrarProdutos;
-    private javax.swing.JButton btCadastrarProdutos1;
     private javax.swing.JButton btCadastrarProdutos2;
+    private javax.swing.JButton btCadastrarUsuario;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu3;

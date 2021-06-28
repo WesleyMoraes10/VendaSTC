@@ -6,8 +6,13 @@
 package view;
 
 import controller.ControllerFormaPagamento;
+import controller.ControllerVenda;
+import controller.ControllerVendaFormaPagamento;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import model.ModelFormaPagamento;
+import model.ModelVenda;
+import model.ModelVendaFormaPagamento;
 
 /**
  *
@@ -21,7 +26,17 @@ public class ViewFormPagamento extends javax.swing.JFrame {
     ArrayList<ModelFormaPagamento> listaModelFormaPagamento = new ArrayList<>();
     ControllerFormaPagamento controllerFormaPagamento = new ControllerFormaPagamento();
     ModelFormaPagamento modelFormaPagamento = new ModelFormaPagamento();
+    
+    ControllerVendaFormaPagamento controllerVendaFormaPagamento = new ControllerVendaFormaPagamento();
+    ModelVendaFormaPagamento modelVendaFormaPagamento = new ModelVendaFormaPagamento();
+    
+    ControllerVenda controllerVenda = new ControllerVenda();
+    
+     ModelVenda modelVenda = new ModelVenda();
 
+     
+     private ViewResumPedido viewResumPedido;
+     private ViewCadastroPedidoNova viewCadastroPedidoNova;
     /**
      * Creates new form ViewFormPagamento
      */
@@ -29,6 +44,7 @@ public class ViewFormPagamento extends javax.swing.JFrame {
         initComponents();
         listarFormaPagamentoComboBox();
         preencherCodigoProdutoComboBox();
+        this.viewCadastroPedidoNova = new ViewCadastroPedidoNova();
     }
 
     /**
@@ -43,6 +59,14 @@ public class ViewFormPagamento extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         lblTotalPagar1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        lblTotalPagar = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        btCancelar = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        lblTotalPagar2 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jtfSubtotal = new javax.swing.JTextField();
@@ -55,12 +79,6 @@ public class ViewFormPagamento extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         lblNumVenda = new javax.swing.JLabel();
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
-        jPanel3 = new javax.swing.JPanel();
-        lblTotalPagar = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        btCancelar = new javax.swing.JButton();
-        jPanel5 = new javax.swing.JPanel();
-        lblTotalPagar2 = new javax.swing.JLabel();
 
         jPanel4.setBackground(new java.awt.Color(0, 204, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "VALOR TOTAL A PAGAR", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18), new java.awt.Color(255, 255, 255))); // NOI18N
@@ -91,6 +109,94 @@ public class ViewFormPagamento extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.lightGray, null, null));
+
+        jPanel3.setBackground(new java.awt.Color(0, 204, 255));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "VALOR TOTAL A PAGAR", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18), new java.awt.Color(255, 255, 255))); // NOI18N
+
+        lblTotalPagar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblTotalPagar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTotalPagar.setText("R$");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTotalPagar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(lblTotalPagar)
+                .addGap(0, 11, Short.MAX_VALUE))
+        );
+
+        jButton2.setBackground(new java.awt.Color(0, 102, 51));
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("FINALIZAR");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        btCancelar.setBackground(new java.awt.Color(204, 0, 0));
+        btCancelar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btCancelar.setForeground(new java.awt.Color(255, 255, 255));
+        btCancelar.setText("CANCELAR");
+        btCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCancelarActionPerformed(evt);
+            }
+        });
+
+        jPanel5.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "VALOR TROCO", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
+
+        lblTotalPagar2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblTotalPagar2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTotalPagar2.setText("R$");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTotalPagar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addComponent(lblTotalPagar2)
+                .addGap(0, 11, Short.MAX_VALUE))
+        );
+
+        jPanel6.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(153, 153, 153), null));
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 25)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel16.setText("Forma Pagamento");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+        );
 
         jPanel2.setBackground(new java.awt.Color(153, 255, 153));
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.lightGray, null, null));
@@ -196,67 +302,6 @@ public class ViewFormPagamento extends javax.swing.JFrame {
                 .addGap(24, 24, 24))
         );
 
-        jPanel3.setBackground(new java.awt.Color(0, 204, 255));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "VALOR TOTAL A PAGAR", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18), new java.awt.Color(255, 255, 255))); // NOI18N
-
-        lblTotalPagar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        lblTotalPagar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTotalPagar.setText("R$");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblTotalPagar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(lblTotalPagar)
-                .addGap(0, 11, Short.MAX_VALUE))
-        );
-
-        jButton2.setBackground(new java.awt.Color(0, 102, 51));
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("FINALIZAR");
-
-        btCancelar.setBackground(new java.awt.Color(204, 0, 0));
-        btCancelar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        btCancelar.setForeground(new java.awt.Color(255, 255, 255));
-        btCancelar.setText("CANCELAR");
-        btCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCancelarActionPerformed(evt);
-            }
-        });
-
-        jPanel5.setBackground(new java.awt.Color(204, 204, 204));
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "VALOR TROCO", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
-
-        lblTotalPagar2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        lblTotalPagar2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTotalPagar2.setText("R$");
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblTotalPagar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(lblTotalPagar2)
-                .addGap(0, 11, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -264,19 +309,24 @@ public class ViewFormPagamento extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                         .addComponent(btCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -293,17 +343,11 @@ public class ViewFormPagamento extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -323,8 +367,52 @@ public class ViewFormPagamento extends javax.swing.JFrame {
         jtfCodPagamento.setText(String.valueOf(modelFormaPagamento.getFop_cod()));
     }
     
+    public void salvarVendaFormaPagamento(){
+        modelVendaFormaPagamento.setVfp_num_venda(Integer.valueOf(this.lblNumVenda.getText()));
+        modelVendaFormaPagamento.setVfp_valor_pagamento(Double.parseDouble(jtfSubtotal.getText()));
+        modelVendaFormaPagamento.setVfp_cod_formapagamento(Integer.valueOf(this.jtfCodPagamento.getText()));
+        modelVendaFormaPagamento.setVfp_desc_formapagamento(String.valueOf(this.jcbFormaPagamento.getSelectedItem()));
+        modelVendaFormaPagamento.setVfp_observacao(this.jtfObservacao.getText().trim().toUpperCase());
+        
+        if (controllerVendaFormaPagamento.salvarVendaFormaPagamentoController(modelVendaFormaPagamento) > 0) {
+            //JOptionPane.showMessageDialog(this, "Venda Forma pagamento cadastrado com sucesso!", "ATENÇÃO", JOptionPane.INFORMATION_MESSAGE);          
+           
+        } else {
+            JOptionPane.showMessageDialog(this, "Erro ao cadastrar venda forma pagamento!", "ERRO", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    public void finalizadaPedido() {               
+        
+            modelVenda = controllerVenda.retornarVendaController(Integer.valueOf(lblNumVenda.getText()));
+            modelVenda.setVen_status("venda");
+            controllerVenda.alterarVendaController2(modelVenda);
+            //carregarVendas();
+            //limparFormulario();
+
+            //cadastroPedido.carregarVendas();
+            //this.viewResumPedido.cadastroPedido.carregarVendas();
+
+            //abrePedido();
+
+            JOptionPane.showMessageDialog(this, "Venda finalizado com sucesso!", "ATENÇÃO", JOptionPane.INFORMATION_MESSAGE);
+            chamaCadastraPedidoNovo();
+            //imprimirCupom(listaModelProdutosVendasProdutos, modelVenda);
+            this.dispose();
+
+         
+
+    }
+    
+    public void chamaCadastraPedidoNovo(){
+        ViewCadastroPedidoNova viewCadastroPedidoNova = new ViewCadastroPedidoNova();
+        viewCadastroPedidoNova.setVisible(true);
+        viewCadastroPedidoNova.carregarVendas();
+    }
+    
+    
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
-        this.dispose();
+        this.dispose();        
+        chamaCadastraPedidoNovo();
     }//GEN-LAST:event_btCancelarActionPerformed
 
     private void jcbFormaPagamentoPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jcbFormaPagamentoPopupMenuWillBecomeInvisible
@@ -337,6 +425,12 @@ public class ViewFormPagamento extends javax.swing.JFrame {
     private void jtfSubtotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfSubtotalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfSubtotalActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        salvarVendaFormaPagamento();
+        finalizadaPedido();        
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -378,6 +472,7 @@ public class ViewFormPagamento extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -387,6 +482,7 @@ public class ViewFormPagamento extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JComboBox<String> jcbFormaPagamento;
     private javax.swing.JTextField jtfCodPagamento;
     private javax.swing.JTextField jtfObservacao;
